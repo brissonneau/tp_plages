@@ -4,37 +4,24 @@ import biz.ei6.eluvplages.domain.Plage
 import biz.ei6.eluvplages.ui.theme.PlagesTheme
 
 
-
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material.icons.outlined.LocationOn
-import androidx.compose.material.icons.outlined.Schedule
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -43,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import biz.ei6.eluvplages.domain.PlageType
+import biz.ei6.eluvplages.presentation.PlageVM
 
 import coil.compose.AsyncImage
 
@@ -50,10 +38,13 @@ import coil.compose.AsyncImage
 
 @Composable
 fun ListePlageScreen(
+    vm: PlageVM = viewModel(),
     onEventClick: (Plage) -> Unit = {},
     onFabClick: () -> Unit = {},
     onBottomNav: (String) -> Unit = {}
 ) {
+
+    val plages by vm.plages.collectAsState()
 
 
     var bottomSelected by remember { mutableStateOf("Accueil") }
@@ -87,7 +78,7 @@ fun ListePlageScreen(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(
-                items = Plage.LISTE,
+                items = plages,
                 key = { it.id }
             ) { e ->
                 StandardEventCard(

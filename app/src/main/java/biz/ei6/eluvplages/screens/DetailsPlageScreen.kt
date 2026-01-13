@@ -36,12 +36,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import biz.ei6.eluvplages.domain.Plage
+import biz.ei6.eluvplages.presentation.PlageVM
 import biz.ei6.eluvplages.ui.theme.PlagesTheme
 import coil.compose.AsyncImage
 
 
 @Composable
 fun DetailsPlageScreen(
+    vm: PlageVM = viewModel(),
     current: Plage,
     onBack: () -> Unit = {},
     onEdit: () -> Unit = {},
@@ -52,7 +54,7 @@ fun DetailsPlageScreen(
         containerColor = MaterialTheme.colorScheme.background,
         floatingActionButton = {
             ExtendedFloatingActionButton(
-                onClick = {  },
+                onClick = { vm.toggleFavorite(current.id) },
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.surfaceVariant,
                 shape = RoundedCornerShape(16.dp),

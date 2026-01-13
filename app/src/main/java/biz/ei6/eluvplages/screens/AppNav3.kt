@@ -1,40 +1,40 @@
 package biz.ei6.eluvplages.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 import androidx.navigation3.ui.NavDisplay
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import biz.ei6.eluvplages.domain.Plage
-
+import biz.ei6.eluvplages.presentation.PlageVM
 
 
 @Composable
-fun AppNav3() {
+fun AppNav3(navVM: PlageVM = viewModel()) {
 
-  val backStack = rememberNavBackStack(Screen.Home)
-
-    fun goTop(tab : Screen) {
-        backStack.clear()
-        backStack.add(tab)
-
+    // Gère le bouton système “Back”
+    BackHandler(enabled = navVM.backStack.size > 1) {
+        navVM.pop()
     }
 
     NavDisplay(
-        backStack =backStack,
+        backStack = navVM.backStack,
         entryProvider = entryProvider {
 
             entry<Screen.Home> {
                 ListePlageScreen(
 
-                    onEventClick = { e -> backStack.add(Screen.PlageDetail(e.id.toString())) },
+                    vm = navVM,
+                    onEventClick = { e -> navVM.push(Screen.PlageDetail(e.id.toString())) },
 
                     onBottomNav = { label ->
                         when (label) {
-                            "Accueil" -> goTop(Screen.Home)
-                            "Carte" -> goTop(Screen.Map)
-                            "Favoris" -> goTop(Screen.Favorites)
-                            "Profil" -> goTop(Screen.Profile)
+                            "Accueil" -> navVM.goTop(Screen.Home)
+                            "Carte" ->navVM.goTop(Screen.Map)
+                            "Favoris" -> navVM.goTop(Screen.Favorites)
+                            "Profil" -> navVM.goTop(Screen.Profile)
                         }
                     }
                 )
@@ -47,7 +47,7 @@ fun AppNav3() {
                 DetailsPlageScreen(
 
                     current = event,
-                    onBack = { backStack.removeLastOrNull() }
+                    onBack = { navVM.pop() }
                 )
             }
 
