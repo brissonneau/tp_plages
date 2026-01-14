@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PlagesTheme (darkTheme = true){
-               AppNav3()
+               AppNav3( org.koin.androidx.compose.koinViewModel())
             }
         }
     }

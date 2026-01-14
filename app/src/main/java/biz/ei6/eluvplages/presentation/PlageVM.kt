@@ -8,7 +8,9 @@ import biz.ei6.eluvplages.screens.Screen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class PlageVM : ViewModel() {
+class PlageVM (
+    private val repo: PlageRepository
+) : ViewModel() {
     val backStack: SnapshotStateList<Screen> = mutableStateListOf(Screen.Home)
 
     fun push(screen: Screen) {
@@ -29,7 +31,7 @@ class PlageVM : ViewModel() {
         backStack.clear()
         backStack.add(tab)
     }
-
+/*
     private val _plages = MutableStateFlow<List<Plage>>(Plage.LISTE)
     val plages: StateFlow<List<Plage>> = _plages
 
@@ -43,5 +45,9 @@ class PlageVM : ViewModel() {
         }
     }
 
+*/
+    val plages = repo.plages
 
+    fun toggleFavorite(id: String) = repo.toggleFavorite(id)
+    fun add(plage: Plage) = repo.add(plage)
 }
