@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import biz.ei6.eluvplages.framework.AppStartupEffects
 import biz.ei6.eluvplages.screens.AppNav3
 
 import biz.ei6.eluvplages.ui.theme.PlagesTheme
@@ -14,6 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            AppStartupEffects()
             PlagesTheme (darkTheme = true){
                AppNav3( org.koin.androidx.compose.koinViewModel())
             }
