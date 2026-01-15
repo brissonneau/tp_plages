@@ -12,6 +12,7 @@ sealed interface Screen : NavKey {
     @Serializable data object Profile : Screen
 
     @Serializable data class PlageDetail(val eventId: String) : Screen
+    @Serializable data object PlageEdit: Screen
 
 
 }

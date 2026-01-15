@@ -323,7 +323,7 @@ private fun InfoCard(
 
 @Composable
 @Preview(showBackground = true)
-fun JudoEventDetailScreenPreview() {
+fun DetailsPlageScreenPreview() {
     PlagesTheme(darkTheme = true) {
         DetailsPlageScreen(current = Plage.DEFAULT)
     }

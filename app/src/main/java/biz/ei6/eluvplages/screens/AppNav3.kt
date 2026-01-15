@@ -28,7 +28,7 @@ fun AppNav3(navVM: PlageVM = viewModel()) {
 
                     vm = navVM,
                     onEventClick = { e -> navVM.push(Screen.PlageDetail(e.id.toString())) },
-
+                    onFabClick = { navVM.push(Screen.PlageEdit) },
                     onBottomNav = { label ->
                         when (label) {
                             "Accueil" -> navVM.goTop(Screen.Home)
@@ -47,6 +47,14 @@ fun AppNav3(navVM: PlageVM = viewModel()) {
                 DetailsPlageScreen(
 
                     current = event,
+                    onBack = { navVM.pop() }
+                )
+            }
+
+            entry<Screen.PlageEdit> { key ->
+
+                EditPlageScreen(
+                    vm = navVM,
                     onBack = { navVM.pop() }
                 )
             }
