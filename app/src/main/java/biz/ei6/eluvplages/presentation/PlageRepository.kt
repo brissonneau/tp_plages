@@ -5,7 +5,8 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface PlageRepository {
     val plages : StateFlow<List<Plage>>
-    fun toggleFavorite(id:String)
-    fun add(plage : Plage)
+    suspend fun toggleFavorite(id:String)
+    suspend fun add(plage : Plage)
+    fun init()
 }
 

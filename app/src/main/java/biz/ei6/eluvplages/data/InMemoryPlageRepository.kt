@@ -3,7 +3,7 @@ package biz.ei6.eluvplages.data
 import biz.ei6.eluvplages.domain.Plage
 import biz.ei6.eluvplages.presentation.PlageRepository
 import kotlinx.coroutines.flow.MutableStateFlow
-
+/*
 class InMemoryPlageRepository : PlageRepository {
     private val _plages = MutableStateFlow<List<Plage>>(Plage.LISTE)
     override val plages = _plages
@@ -23,5 +23,5 @@ class InMemoryPlageRepository : PlageRepository {
     }
 
 
-}
+}*/
 

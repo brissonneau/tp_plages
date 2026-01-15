@@ -3,10 +3,12 @@ package biz.ei6.eluvplages.presentation
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import biz.ei6.eluvplages.domain.Plage
 import biz.ei6.eluvplages.screens.Screen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 class PlageVM (
     private val repo: PlageRepository
@@ -48,6 +50,15 @@ class PlageVM (
 */
     val plages = repo.plages
 
-    fun toggleFavorite(id: String) = repo.toggleFavorite(id)
-    fun add(plage: Plage) = repo.add(plage)
+    fun toggleFavorite(id: String) {
+        viewModelScope.launch { repo.toggleFavorite(id) }
+    }
+
+    fun add(plage: Plage) {
+        viewModelScope.launch { repo.add(plage) }
+    }
+
+    init {
+        viewModelScope.launch { repo.init()}
+    }
 }
