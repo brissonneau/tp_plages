@@ -1,12 +1,16 @@
 package biz.ei6.eluvplages.domain
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 enum class PlageType { Sable, Galets, Roche }
 
+@Entity(tableName = "plages")
 data class Plage(
-    val id: String,
+    @PrimaryKey val id: String,
     val nom: String,
     val description: String,
-    val type: PlageType ,
+    val type: PlageType,
     val largeur: Double,
     val longueur: Double,
     val latitude: Double,
@@ -14,11 +18,11 @@ data class Plage(
     val lieu : String,
     val url : String,
     val isFavorite: Boolean = false,
-    val thumbImageUrl: List<String> = mutableListOf(),
+    val thumbImageUrl: List<String> = emptyList(),
     val featuredImageUrl: String? = null,
 
 
-) {
+    ) {
 
     companion object {
         val LISTE = listOf(

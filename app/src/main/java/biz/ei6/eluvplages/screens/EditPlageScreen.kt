@@ -129,7 +129,7 @@ fun EditPlageScreen(
                     style = MaterialTheme.typography.headlineSmall
                 )
             }
-            
+
 
             if (errorMsg != null) {
                 Surface(

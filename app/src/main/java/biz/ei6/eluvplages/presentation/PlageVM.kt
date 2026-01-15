@@ -8,6 +8,7 @@ import biz.ei6.eluvplages.domain.Plage
 import biz.ei6.eluvplages.screens.Screen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class PlageVM (
@@ -48,7 +49,10 @@ class PlageVM (
     }
 
 */
-    val plages = repo.plages
+    val plages  : StateFlow<List<Plage>> =
+        repo.plages.stateIn(scope = viewModelScope,
+            started = kotlinx.coroutines.flow.SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList())
 
     fun toggleFavorite(id: String) {
         viewModelScope.launch { repo.toggleFavorite(id) }
