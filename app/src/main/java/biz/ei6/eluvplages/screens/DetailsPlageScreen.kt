@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import biz.ei6.eluvplages.domain.Plage
+import biz.ei6.eluvplages.framework.OsmMapPreview
 import biz.ei6.eluvplages.presentation.PlageVM
 import biz.ei6.eluvplages.ui.theme.PlagesTheme
 import coil.compose.AsyncImage
@@ -175,46 +176,17 @@ fun DetailsPlageScreen(
 
             /* ───────────── Map Preview ───────────── */
 
-            Box(
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .height(130.dp)
-                    .clip(RoundedCornerShape(14.dp))
-                    .background(MaterialTheme.colorScheme.primary)
-            ) {
-                AsyncImage(
-                    model = "https://placehold.co/600x400?text=Map+Viroflay",
-
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
-                )
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background.copy(alpha = 0.1f)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Surface(
-                        shape = CircleShape,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.85f)
-                    ) {
-                        Icon(
-                            Icons.Outlined.NearMe,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.surface,
-                            modifier = Modifier.padding(8.dp)
-                        )
-                    }
-                }
-            }
-
-
+            OsmMapPreview(
+                latitude = current.latitude,
+                longitude = current.longitude,
+                primary = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
 
             HorizontalDivider(Modifier.padding(16.dp), color = Color.DarkGray)
 
             /* ───────────── Description ───────────── */
+
 
             Column(Modifier.padding(horizontal = 16.dp)) {
                 Text(

@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.androidx.work.runtime.ktx)
     ksp(libs.room.compiler)
 
+    implementation("org.osmdroid:osmdroid-android:6.1.18")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
