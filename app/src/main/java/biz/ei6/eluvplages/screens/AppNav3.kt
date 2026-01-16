@@ -59,7 +59,9 @@ fun AppNav3(navVM: PlageVM = viewModel()) {
                 )
             }
 
-            entry<Screen.Map> {           }
+            entry<Screen.Map> { MapPlageScreen(navVM.plages,
+                onBack = { navVM.goTop(Screen.Home ) })
+            }
             entry<Screen.Favorites> { /* … */ }
             entry<Screen.Profile> { /* … */ }
         }
