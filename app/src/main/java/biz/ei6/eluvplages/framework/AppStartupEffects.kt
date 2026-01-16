@@ -15,7 +15,10 @@ fun AppStartupEffects() {
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         // même si refusé, tu peux quand même scheduler (le worker tournera, mais pas de notif)
-        BackgroundSync.schedule(context)
+       // BackgroundSync.schedule(context) version WorkManager
+
+        BackgroundSync.scheduleServerPollAlarm(context)
+
     }
 
     LaunchedEffect(Unit) {
@@ -24,7 +27,9 @@ fun AppStartupEffects() {
         if (Build.VERSION.SDK_INT >= 33) {
             notifPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
         } else {
-            BackgroundSync.schedule(context)
+            // BackgroundSync.schedule(context) version WorkManager
+
+            BackgroundSync.scheduleServerPollAlarm(context)
         }
     }
 }

@@ -1,6 +1,8 @@
 package biz.ei6.eluvplages.framework
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 
@@ -9,23 +11,13 @@ class ServerPollWorker(
     params: WorkerParameters
 ) : CoroutineWorker(appContext, params) {
 
+    val TAG = "ServerPollWorker"
+
     override suspend fun doWork(): Result {
-        // TODO: appeler le serveur ici (Retrofit/Ktor/etc.)
-        // Exemple: val hasUpdate = serverClient.checkSomething()
 
-        val hasUpdate = true // placeholder
+        applicationContext.sendBroadcast(Intent(InternalBroadcasts.ACTION_SERVER_HAS_UPDATE))
 
-        if (hasUpdate) {
-            Notif.ensureChannel(applicationContext)
-            val pi = openAppPendingIntent(applicationContext)
-
-            Notif.show(
-                applicationContext,
-                title = "Nouvelle info disponible",
-                text = "Cliquer pour ouvrir l’application",
-                pendingIntent = pi
-            )
-        }
+        Log.d(TAG, "ServerPollWorker.doWork")
 
         return Result.success()
     }
