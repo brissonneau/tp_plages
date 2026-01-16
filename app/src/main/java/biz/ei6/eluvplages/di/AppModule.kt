@@ -10,6 +10,8 @@ import org.koin.dsl.module
 import org.koin.core.module.dsl.viewModel
 
 import biz.ei6.eluvplages.presentation.PlageVM
+import biz.ei6.eluvplages.presentation.ProfileVM
+
 
 val appModule = module {
 
@@ -21,10 +23,10 @@ val appModule = module {
 
     // Repository
     single<PlageRepository> { RoomPlageRepository(get()) }
-    // get() ici = JudoEventDao
+
 
     viewModel { PlageVM(get()) }
-
+    viewModel { ProfileVM(get()) } //viewModel { ProfileVM(get<Application>()) }
 }
 
 

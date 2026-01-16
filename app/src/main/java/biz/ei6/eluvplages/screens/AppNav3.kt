@@ -9,6 +9,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import biz.ei6.eluvplages.domain.Plage
 import biz.ei6.eluvplages.presentation.PlageVM
+import biz.ei6.eluvplages.presentation.ProfileVM
 
 
 @Composable
@@ -63,7 +64,8 @@ fun AppNav3(navVM: PlageVM = viewModel()) {
                 onBack = { navVM.goTop(Screen.Home ) })
             }
             entry<Screen.Favorites> { /* … */ }
-            entry<Screen.Profile> { /* … */ }
+
+            entry<Screen.Profile> { ProfileScreen(onBack = { navVM.goTop(Screen.Home ) } ) }
         }
     )
 }
